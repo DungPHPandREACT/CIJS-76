@@ -12,6 +12,7 @@ const Section = () => {
             price1="20.000"
             price2="18.000"
             promotionalPrice={true}
+            checkStar={true}
           />
           <CardProduct
             title="Sale Item"
@@ -19,7 +20,7 @@ const Section = () => {
             price2="25.000"
             promotionalPrice={true}
           />
-          <CardProduct title="Popular Item" price1="40.000" />
+          <CardProduct title="Popular Item" price1="40.000" checkStar={true} />
           <CardProduct title="Sale Item" />
           <CardProduct title="Fancy Product" />
           <CardProduct title="Special Item" />

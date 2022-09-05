@@ -1,6 +1,14 @@
 import React from 'react';
 
-const CardProduct = (props) => {
+const CardProduct = ({
+  title,
+  price1,
+  price2,
+  promotionalPrice,
+  checkStar,
+}) => {
+  //   const { title, price1, price2, promotionalPrice, checkStar } = props;
+
   return (
     <div className="col mb-5">
       <div className="card h-100">
@@ -11,19 +19,30 @@ const CardProduct = (props) => {
         />
         <div className="card-body p-4">
           <div className="text-center">
-            <h5 className="fw-bolder">{props.title}</h5>
-            {/* ${props.price1} - ${props.price2} */}
-            {props.promotionalPrice ? (
+            <h5 className="fw-bolder">{title}</h5>
+            {checkStar ? (
+              <div className="d-flex justify-content-center small text-warning mb-2">
+                <div className="bi-star-fill" />
+                <div className="bi-star-fill" />
+                <div className="bi-star-fill" />
+                <div className="bi-star-fill" />
+                <div className="bi-star-fill" />
+              </div>
+            ) : (
+              ''
+            )}
+            {/* ${price1} - ${price2} */}
+            {promotionalPrice ? (
               <span>
                 <span className="text-muted text-decoration-line-through">
-                  ${props.price1}
+                  ${price1}
                 </span>
-                ${props.price2}
+                ${price2}
               </span>
-            ) : props.price1 && !props.price2 ? (
-              `$${props.price1}`
+            ) : price1 && !price2 ? (
+              `$${price1}`
             ) : (
-              `$${props.price1} - $${props.price2}`
+              `$${price1} - $${price2}`
             )}
           </div>
         </div>
