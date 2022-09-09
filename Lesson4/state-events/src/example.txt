@@ -1,0 +1,38 @@
+import React, { Fragment, useState } from 'react';
+
+const App = () => {
+  // let number = 10;
+  const [number, setNumber] = useState(10);
+
+  const handleIncreaseNumber = (num) => {
+    console.log(num);
+    setNumber(number + num);
+  };
+
+  const logger = () => {
+    console.log('Xin chào thế giới');
+  };
+
+  return (
+    <>
+      <h1>{number}</h1>
+      <button
+        onClick={() => {
+          handleIncreaseNumber(1);
+          logger();
+          // ghi code ở đây
+        }}
+      >
+        +1
+      </button>
+      <button onClick={handleIncreaseNumber}>+2</button>
+    </>
+  );
+};
+
+export default App;
+
+
+
+
+
