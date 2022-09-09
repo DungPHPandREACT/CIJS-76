@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import Images from './Images';
 
 const App = () => {
   const [number, setNumber] = useState(0);
@@ -36,7 +37,7 @@ const App = () => {
 
   return (
     <div style={{ margin: 'auto' }}>
-      <div>
+      {/* <div>
         <input
           type="number"
           placeholder="Enter your number..."
@@ -48,7 +49,8 @@ const App = () => {
         <button onClick={handleDecreaseNumber}>-</button>
         <span style={{ fontSize: '20px' }}>{number}</span>
         <button onClick={handleIncreaseNumber}>+</button>
-      </div>
+      </div> */}
+      <Images />
     </div>
   );
 };

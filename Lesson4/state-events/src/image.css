@@ -1,0 +1,29 @@
+img {
+}
+
+.slide img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+
+.container-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.arrow-left {
+  font-size: 50px;
+  margin-right: 20px;
+}
+
+.arrow-right {
+  font-size: 50px;
+  margin-left: 20px;
+}
+
+.slide {
+  border: solid 2px gray;
+}
