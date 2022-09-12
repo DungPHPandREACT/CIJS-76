@@ -1,0 +1,10 @@
+button.btn-create.btn.btn-success.d-block.w-100 {
+  width: 150px !important;
+  height: 40px;
+  padding: 5px;
+  margin: 15px;
+}
+
+.mg-btn {
+  margin-right: 12px;
+}
