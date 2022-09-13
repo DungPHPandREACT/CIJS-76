@@ -2,6 +2,10 @@ import React from 'react';
 import { Button } from 'reactstrap';
 
 const Movie = (props) => {
+  const handleRemoveMovie = () => {
+    props.onMovie(props.id);
+  };
+
   return (
     <tr>
       <th scope="row">{props.id}</th>
@@ -13,7 +17,9 @@ const Movie = (props) => {
         <Button color="primary" className="mg-btn">
           Edit
         </Button>
-        <Button color="danger">Delete</Button>
+        <Button color="danger" onClick={handleRemoveMovie}>
+          Delete
+        </Button>
       </td>
     </tr>
   );

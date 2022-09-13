@@ -61,6 +61,13 @@ const App = () => {
     setListMovie(listMovieTemp);
   };
 
+  const handleDeleteMovie = (id) => {
+    const listMovieTemp = [...listMovie];
+    const movies = listMovieTemp.filter((element) => !(element.id == id));
+    console.log('movies: ', movies);
+    setListMovie(movies);
+  };
+
   return (
     <Container className="container-crud">
       <Row>
@@ -121,6 +128,7 @@ const App = () => {
                   description={item.description}
                   create={item.createAt}
                   update={item.updateAt}
+                  onMovie={handleDeleteMovie}
                 ></Movie>
               );
             })}
