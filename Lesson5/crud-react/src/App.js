@@ -40,6 +40,8 @@ const App = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [movieUpdate, setMovieUpdate] = useState({});
+  const [dataSearch, setDataSearch] = useState('');
+  const [dataMovie, setDataMovie] = useState([]);
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -93,6 +95,22 @@ const App = () => {
     // clear input
     setTitle('');
     setDescription('');
+  };
+
+  const handleSearchMovie = (event) => {
+    const dataInput = event.target.value;
+    if (dataInput === '') {
+      setDataMovie([]);
+      setDataSearch(dataInput);
+    } else {
+      const dataInput = event.target.value;
+      setDataSearch(dataInput);
+
+      const newListMovie = listMovie.filter((movie) => {
+        return movie.title.includes(dataInput);
+      });
+      setDataMovie(newListMovie);
+    }
   };
 
   return (
@@ -153,6 +171,16 @@ const App = () => {
         <h1>Movie Index</h1>
       </Row>
       <Row>
+        <Input
+          id="search"
+          name="search"
+          placeholder="Search ...."
+          type="text"
+          onChange={handleSearchMovie}
+          value={dataSearch}
+        />
+      </Row>
+      <Row>
         <Table>
           <thead>
             <tr>
@@ -165,19 +193,33 @@ const App = () => {
             </tr>
           </thead>
           <tbody>
-            {listMovie.map((item) => {
-              return (
-                <Movie
-                  id={item.id}
-                  title={item.title}
-                  description={item.description}
-                  create={item.createAt}
-                  update={item.updateAt}
-                  onMovie={handleDeleteMovie}
-                  onUpdate={handleGetDataUpdate}
-                ></Movie>
-              );
-            })}
+            {dataMovie.length > 0
+              ? dataMovie.map((item) => {
+                  return (
+                    <Movie
+                      id={item.id}
+                      title={item.title}
+                      description={item.description}
+                      create={item.createAt}
+                      update={item.updateAt}
+                      onMovie={handleDeleteMovie}
+                      onUpdate={handleGetDataUpdate}
+                    ></Movie>
+                  );
+                })
+              : listMovie.map((item) => {
+                  return (
+                    <Movie
+                      id={item.id}
+                      title={item.title}
+                      description={item.description}
+                      create={item.createAt}
+                      update={item.updateAt}
+                      onMovie={handleDeleteMovie}
+                      onUpdate={handleGetDataUpdate}
+                    ></Movie>
+                  );
+                })}
           </tbody>
         </Table>
       </Row>
