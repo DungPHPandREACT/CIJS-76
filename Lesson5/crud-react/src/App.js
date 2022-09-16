@@ -81,8 +81,18 @@ const App = () => {
   };
 
   const handleUpdateMovie = () => {
-    console.log('title: ', title);
-    console.log('description: ', description);
+    const movies = [...listMovie];
+    const index = movies.findIndex((movie) => {
+      return movie.id === movieUpdate.id;
+    });
+    // Update data trong object
+    movies[index].title = title;
+    movies[index].description = description;
+    setListMovie([...movies]);
+    setMovieUpdate({});
+    // clear input
+    setTitle('');
+    setDescription('');
   };
 
   return (
