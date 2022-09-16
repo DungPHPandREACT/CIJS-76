@@ -6,6 +6,10 @@ const Movie = (props) => {
     props.onMovie(props.id);
   };
 
+  const handleGetID = () => {
+    props.onUpdate(props.id);
+  };
+
   return (
     <tr>
       <th scope="row">{props.id}</th>
@@ -14,7 +18,7 @@ const Movie = (props) => {
       <td>{props.create}</td>
       <td>{props.update}</td>
       <td>
-        <Button color="primary" className="mg-btn">
+        <Button color="primary" className="mg-btn" onClick={handleGetID}>
           Edit
         </Button>
         <Button color="danger" onClick={handleRemoveMovie}>

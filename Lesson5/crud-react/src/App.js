@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   Button,
+  Col,
   Container,
   Form,
   FormGroup,
@@ -38,6 +39,7 @@ const App = () => {
   ]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [movieUpdate, setMovieUpdate] = useState({});
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -68,17 +70,48 @@ const App = () => {
     setListMovie(movies);
   };
 
+  const handleGetDataUpdate = (id) => {
+    const movies = [...listMovie];
+    const index = movies.findIndex((movie) => {
+      return movie.id === id;
+    });
+    setTitle(movies[index].title);
+    setDescription(movies[index].description);
+    setMovieUpdate(movies[index]);
+  };
+
+  const handleUpdateMovie = () => {
+    console.log('title: ', title);
+    console.log('description: ', description);
+  };
+
   return (
     <Container className="container-crud">
       <Row>
-        <Button
-          color="success"
-          block="false"
-          className="btn-create"
-          onClick={handleAddNewMovie}
-        >
-          Create
-        </Button>
+        <Col span={4}>
+          <Button
+            color="success"
+            block="false"
+            className="btn-create"
+            onClick={handleAddNewMovie}
+          >
+            Create
+          </Button>
+        </Col>
+        <Col span={4}>
+          {movieUpdate.id ? (
+            <Button
+              color="primary"
+              block="false"
+              className="btn-create"
+              onClick={handleUpdateMovie}
+            >
+              Update
+            </Button>
+          ) : (
+            ''
+          )}
+        </Col>
       </Row>
       <Row>
         <Form>
@@ -89,6 +122,7 @@ const App = () => {
               name="title"
               placeholder="Enter your title..."
               type="text"
+              value={title}
               onChange={handleChangeTitle}
             />
           </FormGroup>
@@ -99,6 +133,7 @@ const App = () => {
               name="description"
               placeholder="Enter your description..."
               type="text"
+              value={description}
               onChange={handleChangeDescription}
             />
           </FormGroup>
@@ -129,6 +164,7 @@ const App = () => {
                   create={item.createAt}
                   update={item.updateAt}
                   onMovie={handleDeleteMovie}
+                  onUpdate={handleGetDataUpdate}
                 ></Movie>
               );
             })}
