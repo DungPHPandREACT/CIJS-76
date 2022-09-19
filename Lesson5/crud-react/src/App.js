@@ -42,6 +42,7 @@ const App = () => {
   const [movieUpdate, setMovieUpdate] = useState({});
   const [dataSearch, setDataSearch] = useState('');
   const [dataMovie, setDataMovie] = useState([]);
+  const [widthState, setWidthState] = useState(50);
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -115,6 +116,9 @@ const App = () => {
 
   return (
     <Container className="container-crud">
+      <div
+        style={{ width: `${widthState}%`, background: 'red', height: '50px' }}
+      ></div>
       <Row>
         <Col span={4}>
           <Button
