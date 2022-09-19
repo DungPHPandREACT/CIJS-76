@@ -1,30 +1,81 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 const App = () => {
+  const [listExpense, setListExpense] = useState([]);
+  const [name, setName] = useState('');
+  const [amount, setAmount] = useState('');
+  const [date, setDate] = useState('');
+
+  const [toggleForm, setToggleForm] = useState(false);
+
+  const handleShowForm = () => {
+    setToggleForm(true);
+  };
+
+  const handleAddExpense = () => {
+    const expense = {
+      name,
+      amount,
+      date,
+    };
+    // C1
+    // const data = [...listExpense];
+    // data.push(expense);
+    // setListExpense([...data])
+    // C2
+    setListExpense([...listExpense, expense]);
+  };
+
+  console.log(listExpense);
+
   return (
     <div className="container-app">
-      {/* <div className="container-app__add">
-        <button className="btn-app btn-add-new">ADD NEW EXPENSE</button>
-      </div> */}
-      <div className="container-app__form">
-        <div className="row-input">
-          <label>Name</label>
-          <input type="text" placeholder="Enter name here ..." />
+      {/* Button Add new expense */}
+      {toggleForm ? (
+        <div className="container-app__form">
+          <div className="row-input">
+            <label>Name</label>
+            <input
+              type="text"
+              placeholder="Enter name here ..."
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="row-input">
+            <label>Amount</label>
+            <input
+              type="text"
+              placeholder="Enter amount here ..."
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
+          </div>
+          <div className="row-input">
+            <label>Date</label>
+            <input
+              type="date"
+              placeholder="dd/mm/yy"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </div>
+          <div className="row-input row-button">
+            <button className="button-add" onClick={handleAddExpense}>
+              Add
+            </button>
+            <button className="button-cancel">Cancel</button>
+          </div>
         </div>
-        <div className="row-input">
-          <label>Amount</label>
-          <input type="text" placeholder="Enter amount here ..." />
+      ) : (
+        <div className="container-app__add">
+          <button className="btn-app btn-add-new" onClick={handleShowForm}>
+            ADD NEW EXPENSE
+          </button>
         </div>
-        <div className="row-input">
-          <label>Date</label>
-          <input type="date" placeholder="dd/mm/yy" />
-        </div>
-        <div className="row-input row-button">
-          <button className="button-add">Add</button>
-          <button className="button-cancel">Cancel</button>
-        </div>
-      </div>
+      )}
+
       <div className="container-app__content">
         <div className="content-header">
           <p>Filter by year</p>
