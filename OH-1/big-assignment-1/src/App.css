@@ -311,3 +311,12 @@ button.button-cancel {
 input::placeholder {
   padding: 10px;
 }
+
+.total-amount {
+  color: #ffff;
+  font-size: 30px;
+  padding: 20px;
+  border: 1px solid #fff;
+  margin-bottom: 20px;
+  border-radius: 12px;
+}

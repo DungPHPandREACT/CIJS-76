@@ -2,10 +2,33 @@ import React, { useState } from 'react';
 import './App.css';
 
 const App = () => {
-  const [listExpense, setListExpense] = useState([]);
+  const [listExpense, setListExpense] = useState([
+    {
+      name: 'Nguyễn Văn A',
+      amount: 40,
+      date: '2022-01-01',
+    },
+    {
+      name: 'Nguyễn Văn A',
+      amount: 60,
+      date: '2022-9-9',
+    },
+    {
+      name: 'Nguyễn Văn B',
+      amount: 20,
+      date: '2021-09-09',
+    },
+    {
+      name: 'Nguyễn Văn B',
+      amount: 80,
+      date: '2021-01-01',
+    },
+  ]);
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState('');
+  const [yearFilter, setYearFilter] = useState('2022');
+  const [listChart, setListChart] = useState([]);
 
   const [toggleForm, setToggleForm] = useState(false);
 
@@ -19,6 +42,7 @@ const App = () => {
       amount,
       date,
     };
+    console.log('date: ', date);
     // C1
     // const data = [...listExpense];
     // data.push(expense);
@@ -27,7 +51,39 @@ const App = () => {
     setListExpense([...listExpense, expense]);
   };
 
-  console.log(listExpense);
+  const handleCloseForm = () => {
+    setToggleForm(false);
+    setName('');
+    setAmount('');
+    setDate('');
+  };
+
+  const handleGetYearFilter = (event) => {
+    let total = 0;
+    console.log(event.target.value);
+    setYearFilter(event.target.value);
+    let listData = listExpense.filter((element) => {
+      return element.date.split('-')[0] == event.target.value;
+    });
+    for (let i = 0; i < listData.length; i++) {
+      total += parseInt(listData[i].amount);
+    }
+
+    for (let i = 0; i < listData.length; i++) {
+      listData[i].percent = listData[i].amount / total;
+    }
+    console.log('listData: ', listData);
+    setListChart(listData);
+  };
+
+  const convertMonth = (month) => {
+    switch (parseInt(month)) {
+      case 1:
+        return 'January';
+      case 9:
+        return 'September';
+    }
+  };
 
   return (
     <div className="container-app">
@@ -65,7 +121,9 @@ const App = () => {
             <button className="button-add" onClick={handleAddExpense}>
               Add
             </button>
-            <button className="button-cancel">Cancel</button>
+            <button className="button-cancel" onClick={handleCloseForm}>
+              Cancel
+            </button>
           </div>
         </div>
       ) : (
@@ -79,97 +137,47 @@ const App = () => {
       <div className="container-app__content">
         <div className="content-header">
           <p>Filter by year</p>
-          <select>
-            <option>2022</option>
-            <option>2021</option>
+          <select value={yearFilter} onChange={handleGetYearFilter}>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
           </select>
         </div>
         <div className="content-body">
+          {/* <div className="total-amount">Total: 50000$</div> */}
           <div className="content-body__chart">
-            <div className="chart">
-              <p>Jan</p>
-              <div className="chart-percent">
-                <div className="chart-bar-fill"></div>
+            {listChart.map((element, index) => (
+              <div className="chart">
+                <p>{convertMonth(element.date.split('-')[1])}</p>
+                <div className="chart-percent">
+                  <div
+                    className="chart-bar-fill"
+                    style={{ height: `${element.percent * 100}%` }}
+                  ></div>
+                </div>
               </div>
-            </div>
-            <div className="chart">
-              <p>Jan</p>
-              <div className="chart-percent">
-                <div className="chart-bar-fill"></div>
-              </div>
-            </div>
-            <div className="chart">
-              <p>Jan</p>
-              <div className="chart-percent">
-                <div className="chart-bar-fill"></div>
-              </div>
-            </div>
-            <div className="chart">
-              <p>Jan</p>
-              <div className="chart-percent">
-                <div className="chart-bar-fill"></div>
-              </div>
-            </div>
-            <div className="chart">
-              <p>Jan</p>
-              <div className="chart-percent">
-                <div className="chart-bar-fill"></div>
-              </div>
-            </div>
-            <div className="chart">
-              <p>Jan</p>
-              <div className="chart-percent">
-                <div className="chart-bar-fill"></div>
-              </div>
-            </div>
-            <div className="chart">
-              <p>Jan</p>
-              <div className="chart-percent">
-                <div className="chart-bar-fill"></div>
-              </div>
-            </div>
-            <div className="chart">
-              <p>Jan</p>
-              <div className="chart-percent">
-                <div className="chart-bar-fill"></div>
-              </div>
-            </div>
-            <div className="chart">
-              <p>Jan</p>
-              <div className="chart-percent">
-                <div className="chart-bar-fill"></div>
-              </div>
-            </div>
-            <div className="chart">
-              <p>Jan</p>
-              <div className="chart-percent">
-                <div className="chart-bar-fill"></div>
-              </div>
-            </div>
-            <div className="chart">
-              <p>Jan</p>
-              <div className="chart-percent">
-                <div className="chart-bar-fill"></div>
-              </div>
-            </div>
-            <div className="chart">
-              <p>Jan</p>
-              <div className="chart-percent">
-                <div className="chart-bar-fill"></div>
-              </div>
-            </div>
+            ))}
           </div>
-          <div className="content-body__expense">
-            <div className="expense-left">
-              <div className="expense-time">
-                <p className="expense-time__month">January</p>
-                <p className="expense-time__year">2022</p>
-                <p className="expense-time__day">16</p>
+          {listExpense.map((element, index) => {
+            return (
+              <div className="content-body__expense" key={index}>
+                <div className="expense-left">
+                  <div className="expense-time">
+                    <p className="expense-time__month">
+                      {convertMonth(element.date.split('-')[1])}
+                    </p>
+                    <p className="expense-time__year">
+                      {element.date.split('-')[0]}
+                    </p>
+                    <p className="expense-time__day">
+                      {element.date.split('-')[2]}
+                    </p>
+                  </div>
+                  <h3 className="expense-title">{element.name}</h3>
+                </div>
+                <div className="expense-money">${element.amount}</div>
               </div>
-              <h3 className="expense-title">Some Book</h3>
-            </div>
-            <div className="expense-money">$50</div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </div>
