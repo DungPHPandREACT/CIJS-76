@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ColorContext } from '../App';
+import ColorContext from '../context/ColorContext';
 
 const Header = () => {
   const color = useContext(ColorContext);

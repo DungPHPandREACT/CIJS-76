@@ -1,10 +1,9 @@
 import React, { createContext, useContext, useReducer, useState } from 'react';
+import ColorContext from './context/ColorContext';
 import CountContext from './context/CountContext';
 import Page from './Page/Page';
 import Parent from './Parent';
 import { countReducer } from './reducers/counterReducer';
-
-export const ColorContext = createContext();
 
 const App = () => {
   const [color, setColor] = useState('black');
