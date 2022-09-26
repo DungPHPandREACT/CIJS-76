@@ -8,11 +8,24 @@ import { countReducer } from './reducers/counterReducer';
 const App = () => {
   const [color, setColor] = useState('black');
 
+  const [state, dispatch] = useReducer(countReducer, {
+    number: 1,
+  });
+  const increment = () => dispatch({ type: 'INCREMENT', step: 1 });
+  const decrement = () => dispatch({ type: 'DECREMENT', step: 1 });
   return (
-    <ColorContext.Provider value={{ color: color, setColor: setColor }}>
-      <Page />
-    </ColorContext.Provider>
+    <CountContext.Provider
+      value={{ increment, decrement, number: state.number }}
+    >
+      <Parent />
+    </CountContext.Provider>
   );
+
+  // return (
+  //   <ColorContext.Provider value={{ color: color, setColor: setColor }}>
+  //     <Page />
+  //   </ColorContext.Provider>
+  // );
 };
 
 export default App;
