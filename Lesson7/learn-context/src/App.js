@@ -10,7 +10,7 @@ const App = () => {
   const [color, setColor] = useState('black');
 
   return (
-    <ColorContext.Provider value={color}>
+    <ColorContext.Provider value={{ color: color, setColor: setColor }}>
       <Page />
     </ColorContext.Provider>
   );
