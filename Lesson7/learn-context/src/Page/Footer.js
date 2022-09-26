@@ -1,11 +1,7 @@
 import React from 'react';
 
-const Footer = (props) => {
-  return (
-    <div style={{ width: '100%', height: '200px', background: props.color }}>
-      Footer
-    </div>
-  );
+const Footer = () => {
+  return <div style={{ width: '100%', height: '200px' }}>Footer</div>;
 };
 
 export default Footer;
