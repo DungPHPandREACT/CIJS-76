@@ -2,12 +2,22 @@ import React, { useContext, useState } from 'react';
 import { ExampleContext } from '../../App';
 
 const Login = () => {
+  const [name, setName] = useState('');
+
   const data = useContext(ExampleContext);
 
-  const [userName, setUserName] = useState('');
-
   const handleChangeUserName = (event) => {
-    setUserName(event.target.value);
+    setName(event.target.value);
+  };
+
+  const handleLogin = () => {
+    const dataTemp = { ...data.data };
+    console.log(dataTemp);
+
+    dataTemp.name = name;
+    dataTemp.isLogin = true;
+
+    data.setData({ ...dataTemp });
   };
 
   return (
@@ -16,13 +26,13 @@ const Login = () => {
       <div className="body-login">
         <div className="input-username">
           <input
-            value={userName}
+            value={name}
             onChange={handleChangeUserName}
             type="text"
             placeholder="Enter your username..."
           />
         </div>
-        <button>Đăng nhập</button>
+        <button onClick={handleLogin}>Đăng nhập</button>
       </div>
     </div>
   );
