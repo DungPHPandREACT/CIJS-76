@@ -20,7 +20,7 @@ const NavBarPage = () => {
       </NavbarBrand>
 
       <NavbarBrand>
-        {data.data.isLogin ? `Welcome ${data.data.name}` : 'Login'}
+        {data.data.isLogin ? `${data.data.welcome} ${data.data.name}` : 'Login'}
       </NavbarBrand>
     </Navbar>
   );
