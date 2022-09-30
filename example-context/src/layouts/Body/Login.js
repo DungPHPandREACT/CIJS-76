@@ -17,6 +17,8 @@ const Login = () => {
     dataTemp.name = name;
     dataTemp.isLogin = true;
 
+    localStorage.setItem('data', JSON.stringify({ ...dataTemp }));
+
     data.setData({ ...dataTemp });
   };
 
