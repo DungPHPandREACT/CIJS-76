@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navbar, NavbarBrand } from 'reactstrap';
+import { ExampleContext } from '../App';
 
 const NavBarPage = () => {
+  const data = useContext(ExampleContext);
+
   return (
     <Navbar className="my-2" color="dark" dark>
       <NavbarBrand href="/">
@@ -16,7 +19,9 @@ const NavBarPage = () => {
         Reactstrap
       </NavbarBrand>
 
-      <NavbarBrand>Login</NavbarBrand>
+      <NavbarBrand>
+        {data.data.isLogin ? `Welcome ${data.data.name}` : 'Login'}
+      </NavbarBrand>
     </Navbar>
   );
 };
