@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Col,
@@ -14,35 +14,14 @@ import './App.css';
 import Movie from './Movie';
 
 const App = () => {
-  const [listMovie, setListMovie] = useState([
-    {
-      id: 1,
-      title: 'Avenger EndGame',
-      description: '2019',
-      createAt: '11-09-2000',
-      updateAt: '11-09-2000',
-    },
-    {
-      id: 2,
-      title: 'Avenger InfinityWar',
-      description: '2018',
-      createAt: '11-09-2000',
-      updateAt: '11-09-2000',
-    },
-    {
-      id: 3,
-      title: 'Batman Bad Blood',
-      description: '2016',
-      createAt: '11-09-2000',
-      updateAt: '11-09-2000',
-    },
-  ]);
+  const [listMovie, setListMovie] = useState([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [movieUpdate, setMovieUpdate] = useState({});
   const [dataSearch, setDataSearch] = useState('');
   const [dataMovie, setDataMovie] = useState([]);
   const [widthState, setWidthState] = useState(50);
+  const [isCreate, setIsCreate] = useState(true);
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -53,34 +32,75 @@ const App = () => {
   };
 
   const handleAddNewMovie = () => {
-    const time = new Date();
     const newMovie = {
-      id: Math.floor(Math.random() * 100) + 1,
       title: title,
       description: description,
-      createAt: '12/09/2022',
-      updateAt: '12/09/2022',
     };
-    const listMovieTemp = [...listMovie];
-    listMovieTemp.push(newMovie);
-    setListMovie(listMovieTemp);
+    fetch('https://633ae6e3471b8c395577e139.mockapi.io/api/v1/list-movie', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newMovie),
+    })
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (data) {
+        setIsCreate(!isCreate);
+      });
+    // const listMovieTemp = [...listMovie];
+    // listMovieTemp.push(newMovie);
+    // setListMovie(listMovieTemp);
   };
 
   const handleDeleteMovie = (id) => {
-    const listMovieTemp = [...listMovie];
-    const movies = listMovieTemp.filter((element) => !(element.id == id));
-    console.log('movies: ', movies);
-    setListMovie(movies);
+    // const listMovieTemp = [...listMovie];
+    // const movies = listMovieTemp.filter((element) => !(element.id == id));
+    // console.log('movies: ', movies);
+    // setListMovie(movies);
+
+    fetch(
+      'https://633ae6e3471b8c395577e139.mockapi.io/api/v1/list-movie/' + id,
+      {
+        method: 'DELETE',
+      }
+    )
+      .then((res) => res.text()) // or res.json()
+      .then((res) => setIsCreate(!isCreate));
   };
 
   const handleGetDataUpdate = (id) => {
-    const movies = [...listMovie];
-    const index = movies.findIndex((movie) => {
-      return movie.id === id;
-    });
-    setTitle(movies[index].title);
-    setDescription(movies[index].description);
-    setMovieUpdate(movies[index]);
+    // const movies = [...listMovie];
+    // const index = movies.findIndex((movie) => {
+    //   return movie.id === id;
+    // });
+    // setTitle(movies[index].title);
+    // setDescription(movies[index].description);
+    // setMovieUpdate(movies[index]);
+    fetch(
+      'https://633ae6e3471b8c395577e139.mockapi.io/api/v1/list-movie/' + id,
+      {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: 'Đã sửa thông tin',
+          description: 'Đã sửa description',
+        }),
+      }
+    )
+      .then((response) => {
+        response.json().then((response) => {
+          setIsCreate(!isCreate);
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const handleUpdateMovie = () => {
@@ -114,11 +134,18 @@ const App = () => {
     }
   };
 
+  useEffect(() => {
+    fetch('https://633ae6e3471b8c395577e139.mockapi.io/api/v1/list-movie')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setListMovie(data);
+      });
+  }, [isCreate]);
+
   return (
     <Container className="container-crud">
-      <div
-        style={{ width: `${widthState}%`, background: 'red', height: '50px' }}
-      ></div>
       <Row>
         <Col span={4}>
           <Button
