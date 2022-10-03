@@ -2,7 +2,7 @@ import React from 'react';
 
 const Shop = () => {
   return (
-    <div>
+    <>
       <div className="shop_sidebar_area">
         {/* ##### Single Widget ##### */}
         <div className="widget catagory mb-50">
@@ -492,8 +492,8 @@ const Shop = () => {
               {/* Pagination */}
               <nav aria-label="navigation">
                 <ul className="pagination justify-content-end mt-50">
-                  <li className="page-item active">
-                    <a className="page-link" href="#">
+                  <li className="page-item">
+                    <a className="page-link active" href="#">
                       01.
                     </a>
                   </li>
@@ -518,7 +518,7 @@ const Shop = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Cart from '../pages/Cart/Cart';
 import Checkout from '../pages/Checkout/Checkout';
 
@@ -65,19 +65,19 @@ const Sidebar = (props) => {
           <nav className="amado-nav">
             <ul>
               <li>
-                <Link to="/" />
+                <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <Link to="/shop" />
+                <NavLink to="/shop">Shop</NavLink>
               </li>
               <li>
-                <Link to="/product-detail" />
-              </li>
-              <li className="active">
-                <Link to="/cart" />
+                <NavLink to="/product-detail">Product Detail</NavLink>
               </li>
               <li>
-                <Link to="/checkout" />
+                <NavLink to="/cart">Cart</NavLink>
+              </li>
+              <li>
+                <NavLink to="/checkout">Checkout</NavLink>
               </li>
             </ul>
           </nav>
@@ -92,15 +92,15 @@ const Sidebar = (props) => {
           </div>
           {/* Cart Menu */}
           <div className="cart-fav-search mb-100">
-            <a href="cart.html" className="cart-nav">
+            <NavLink to="/cart" className="cart-nav">
               <img src="img/core-img/cart.png" alt="" /> Cart <span>(0)</span>
-            </a>
-            <a href="#" className="fav-nav">
+            </NavLink>
+            <NavLink to="/favourite" className="fav-nav">
               <img src="img/core-img/favorites.png" alt="" /> Favourite
-            </a>
-            <a href="#" className="search-nav">
+            </NavLink>
+            <NavLink to="/search" className="search-nav">
               <img src="img/core-img/search.png" alt="" /> Search
-            </a>
+            </NavLink>
           </div>
           {/* Social Button */}
           <div className="social-info d-flex justify-content-between">

@@ -13,11 +13,11 @@ const App = () => {
     <div>
       <Sidebar>
         <Routes>
-          <Route path="/" element={<Homepage />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/product-detail" element={<ProductDetails />} />
+          <Route path="/" element={<Homepage />} exact="true" />
         </Routes>
       </Sidebar>
       <Footer />

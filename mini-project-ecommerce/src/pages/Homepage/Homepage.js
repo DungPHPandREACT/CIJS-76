@@ -76,42 +76,6 @@ const Homepage = () => {
             </div>
           </a>
         </div>
-        {/* Single Catagory */}
-        <div className="single-products-catagory clearfix">
-          <a href="shop.html">
-            <img src="img/bg-img/7.jpg" alt="" />
-            {/* Hover Content */}
-            <div className="hover-content">
-              <div className="line" />
-              <p>From $318</p>
-              <h4>Metallic Chair</h4>
-            </div>
-          </a>
-        </div>
-        {/* Single Catagory */}
-        <div className="single-products-catagory clearfix">
-          <a href="shop.html">
-            <img src="img/bg-img/8.jpg" alt="" />
-            {/* Hover Content */}
-            <div className="hover-content">
-              <div className="line" />
-              <p>From $318</p>
-              <h4>Modern Rocking Chair</h4>
-            </div>
-          </a>
-        </div>
-        {/* Single Catagory */}
-        <div className="single-products-catagory clearfix">
-          <a href="shop.html">
-            <img src="img/bg-img/9.jpg" alt="" />
-            {/* Hover Content */}
-            <div className="hover-content">
-              <div className="line" />
-              <p>From $318</p>
-              <h4>Home Deco</h4>
-            </div>
-          </a>
-        </div>
       </div>
     </div>
   );
